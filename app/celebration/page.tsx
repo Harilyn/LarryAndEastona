@@ -203,12 +203,12 @@ export default function CelebrationPage() {
           <div className="mx-auto max-w-2xl text-center">
             <p className="mb-8 text-sage-700">
               Your presence at our wedding is the greatest gift of all. However, if you wish to honor us with a gift,
-              you can contribute to our home fund through mobile money using either of the numbers below.
+              you can do so in cash through mobile money using either of the numbers below.
             </p>
             <div className="grid gap-6 md:grid-cols-2">
               <div className="flex flex-col items-center rounded-lg bg-white p-6 shadow-md">
                 <Gift className="mb-4 h-10 w-10 text-sage-600" />
-                <h3 className="mb-2 font-serif text-xl text-sage-800">Orange Money 1</h3>
+                <h3 className="mb-2 font-serif text-xl text-sage-800">Eastina</h3>
                 <div className="mb-4 rounded-md bg-sage-50 p-4 text-center">
                   <p className="font-medium text-sage-800">+232 76 918 978</p>
                 </div>
@@ -224,7 +224,7 @@ export default function CelebrationPage() {
               </div>
               <div className="flex flex-col items-center rounded-lg bg-white p-6 shadow-md">
                 <Gift className="mb-4 h-10 w-10 text-sage-600" />
-                <h3 className="mb-2 font-serif text-xl text-sage-800">Orange Money 2</h3>
+                <h3 className="mb-2 font-serif text-xl text-sage-800">Larry</h3>
                 <div className="mb-4 rounded-md bg-sage-50 p-4 text-center">
                   <p className="font-medium text-sage-800">+232 78 318 549</p>
                 </div>
