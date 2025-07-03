@@ -9,10 +9,9 @@ export const metadata: Metadata = {
   title: "Larry & Eastina | Wedding",
   description: "Join us in celebrating the wedding of Larry and Eastina",
   icons: {
-    icon: [{ url: "/favicon.png", type: "image/svg+xml" }],
-    apple: [{ url: "/favicon.png", type: "image/svg+xml" }],
+    icon: [{ url: "/favicon.ico", type: "image/x-icon" }],
+    apple: [{ url: "/favicon.ico", type: "image/x-icon" }],
   },
-    generator: 'v0.dev'
 }
 
 export default function RootLayout({
