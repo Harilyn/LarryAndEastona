@@ -1,43 +1,60 @@
 "use client"
 
 import { useState } from "react"
-import { useFormStatus } from "react-dom"
-
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Textarea } from "@/components/ui/textarea"
-import { submitRSVP } from "@/app/actions"
-import { Check } from "lucide-react"
+import { Check, Loader2 } from 'lucide-react'
 import { Alert, AlertDescription } from "@/components/ui/alert"
-
-function SubmitButton() {
-  const { pending } = useFormStatus()
-
-  return (
-    <Button type="submit" className="w-full bg-sage-600 hover:bg-sage-700" disabled={pending}>
-      {pending ? "Submitting..." : "Submit RSVP"}
-    </Button>
-  )
-}
 
 export function RSVPForm() {
   const [formSubmitted, setFormSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [message, setMessage] = useState("")
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    attending: 'yes',
+    message: ''
+  })
 
-  async function handleSubmit(formData: FormData) {
-    // Set a fixed guest count of 1 since we're not collecting this anymore
-    formData.set("guests", "1")
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setMessage("")
 
-    const result = await submitRSVP(formData)
+    try {
+      const response = await fetch('/api/rsvp', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
 
-    if (result.success) {
-      setFormSubmitted(true)
-      setMessage(result.message)
-    } else {
-      setMessage(result.message)
+      const result = await response.json()
+
+      if (result.success) {
+        setFormSubmitted(true)
+        setMessage(result.message)
+      } else {
+        setMessage(result.message)
+      }
+    } catch (error) {
+      setMessage('There was an error submitting your RSVP. Please try again.')
+    } finally {
+      setIsSubmitting(false)
     }
+  }
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      [field]: value
+    }))
   }
 
   if (formSubmitted) {
@@ -53,8 +70,14 @@ export function RSVPForm() {
   }
 
   return (
-    <form action={handleSubmit} className="space-y-6">
-      {message && <div className="rounded-md bg-red-50 p-4 text-red-700">{message}</div>}
+    <form onSubmit={handleSubmit} className="space-y-6">
+      {message && (
+        <Alert className={message.includes('error') ? "bg-red-50 border-red-200" : "bg-green-50 border-green-200"}>
+          <AlertDescription className={message.includes('error') ? "text-red-700" : "text-green-700"}>
+            {message}
+          </AlertDescription>
+        </Alert>
+      )}
 
       <div className="space-y-4">
         <Alert className="bg-sage-50 border-sage-200">
@@ -75,22 +98,46 @@ export function RSVPForm() {
       <div className="grid gap-4 md:grid-cols-2">
         <div className="space-y-2">
           <Label htmlFor="firstName">First Name</Label>
-          <Input id="firstName" name="firstName" required />
+          <Input 
+            id="firstName" 
+            value={formData.firstName}
+            onChange={(e) => handleInputChange('firstName', e.target.value)}
+            required 
+            disabled={isSubmitting}
+          />
         </div>
         <div className="space-y-2">
           <Label htmlFor="lastName">Last Name</Label>
-          <Input id="lastName" name="lastName" required />
+          <Input 
+            id="lastName" 
+            value={formData.lastName}
+            onChange={(e) => handleInputChange('lastName', e.target.value)}
+            required 
+            disabled={isSubmitting}
+          />
         </div>
       </div>
 
       <div className="space-y-2">
         <Label htmlFor="email">Email</Label>
-        <Input id="email" name="email" type="email" required />
+        <Input 
+          id="email" 
+          type="email" 
+          value={formData.email}
+          onChange={(e) => handleInputChange('email', e.target.value)}
+          required 
+          disabled={isSubmitting}
+        />
       </div>
 
       <div className="space-y-2">
         <Label>Will you be attending?</Label>
-        <RadioGroup defaultValue="yes" name="attending" className="flex space-x-4">
+        <RadioGroup 
+          value={formData.attending} 
+          onValueChange={(value) => handleInputChange('attending', value)}
+          className="flex space-x-4"
+          disabled={isSubmitting}
+        >
           <div className="flex items-center space-x-2">
             <RadioGroupItem value="yes" id="attending-yes" />
             <Label htmlFor="attending-yes">Joyfully Accept</Label>
@@ -104,10 +151,25 @@ export function RSVPForm() {
 
       <div className="space-y-2">
         <Label htmlFor="message">Message to the Couple (Optional)</Label>
-        <Textarea id="message" name="message" placeholder="Share your well wishes or a special message..." />
+        <Textarea 
+          id="message" 
+          value={formData.message}
+          onChange={(e) => handleInputChange('message', e.target.value)}
+          placeholder="Share your well wishes or a special message..." 
+          disabled={isSubmitting}
+        />
       </div>
 
-      <SubmitButton />
+      <Button type="submit" className="w-full bg-sage-600 hover:bg-sage-700" disabled={isSubmitting}>
+        {isSubmitting ? (
+          <>
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            Submitting...
+          </>
+        ) : (
+          'Submit RSVP'
+        )}
+      </Button>
     </form>
   )
 }
