@@ -8,10 +8,6 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "Larry & Eastina | Wedding",
   description: "Join us in celebrating the wedding of Larry and Eastina",
-  icons: {
-    icon: [{ url: "/favicon.ico", type: "image/x-icon" }],
-    apple: [{ url: "/favicon.ico", type: "image/x-icon" }],
-  },
 }
 
 export default function RootLayout({
@@ -21,10 +17,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-        <link rel="apple-touch-icon" href="/favicon.ico" />
-      </head>
       <body className={inter.className}>{children}</body>
     </html>
   )
