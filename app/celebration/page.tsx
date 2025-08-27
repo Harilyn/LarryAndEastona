@@ -100,52 +100,29 @@ export default function CelebrationPage() {
           <div className="grid gap-8 md:grid-cols-3">
             <div className="flex flex-col items-center rounded-lg bg-white p-8 text-center shadow-md">
               <Calendar className="mb-4 h-12 w-12 text-sage-600" />
-              <h3 className="mb-2 font-serif text-2xl text-sage-800">Ceremony & Reception</h3>
+              <h3 className="mb-2 font-serif text-2xl text-sage-800">Ceremony and Reception & Reception</h3>
               <p className="text-sage-700">Friday, October 17, 2025</p>
-              <p className="text-sage-700">Ceremony: 3:00 PM</p>
+              <p className="text-sage-700">Ceremony: 2:00 PM</p>
               <p className="text-sage-700">Reception: 5:30 PM</p>
             </div>
             <div className="flex flex-col items-center rounded-lg bg-white p-8 text-center shadow-md">
               <MapPin className="mb-4 h-12 w-12 text-sage-600" />
               <h3 className="mb-2 font-serif text-2xl text-sage-800">Location</h3>
-              <p className="text-sage-700">John Obey Beach</p>
-              <p className="text-sage-700">Pennisular, Sierra Leone</p>
+              <p className="text-sage-700">Aberdeen Water Taxi</p>
+              <p className="text-sage-700">Aberdeen, Freetown</p>
               <div className="flex flex-col sm:flex-row gap-2 mt-4">
                 <Button
                   variant="outline"
                   className="border-sage-600 text-sage-600 hover:bg-sage-50 bg-transparent"
                   asChild
                 >
-                  <Link href="https://maps.app.goo.gl/DHSzCX7jRV3SBSqL9" target="_blank" rel="noopener noreferrer">
+                  <Link href="https://maps.app.goo.gl/K7udLxcSLzPuzC3o7" target="_blank" rel="noopener noreferrer">
                     View Map
-                  </Link>
-                </Button>
-                <Button
-                  variant="outline"
-                  className="border-sage-600 text-sage-600 hover:bg-sage-50 bg-transparent"
-                  asChild
-                >
-                  <Link
-                    href="https://drive.google.com/file/d/1rvGeOXSP3aIY5xXN78Htn77NggBUmxhN/view?usp=drive_link"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    View Location <ExternalLink className="ml-1 h-3 w-3" />
                   </Link>
                 </Button>
               </div>
             </div>
-            <div className="flex flex-col items-center rounded-lg bg-white p-8 text-center shadow-md">
-              <Heart className="mb-4 h-12 w-12 text-sage-600" />
-              <h3 className="mb-2 font-serif text-2xl text-sage-800">Accommodations</h3>
-              <p className="text-sage-700">Nearby Resorts</p>
-              <p className="text-sage-700">Book by: September 17, 2025</p>
-              <Button
-                variant="outline"
-                className="mt-4 border-sage-600 text-sage-600 hover:bg-sage-50 bg-transparent"
-                asChild
-              >
-                <Link href="/accommodations">View Resorts</Link>
+    
               </Button>
             </div>
           </div>
@@ -273,8 +250,7 @@ export default function CelebrationPage() {
 
         <div className="container mx-auto px-4 text-center relative z-10">
           <h2 className="mb-4 font-serif text-3xl font-light">Larry & Eastina</h2>
-          <p className="mb-4">October 17, 2025 • John Obey Beach, Sierra Leone</p>
-          <p className="text-sage-300">Made with love 💚</p>
+          <p className="mb-4">October 17, 2025 • Aberdeen Water Taxi, Freetown</p>
         </div>
       </footer>
     </div>
