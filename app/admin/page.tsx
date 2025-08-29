@@ -12,7 +12,7 @@ type RSVP = {
   id: string
   first_name: string
   last_name: string
-  email: string
+  telephone: string
   attending: "yes" | "no"
   message?: string
   created_at: string
@@ -131,7 +131,7 @@ export default function AdminPage() {
                       <TableHeader>
                         <TableRow>
                           <TableHead>Name</TableHead>
-                          <TableHead>Email</TableHead>
+                          <TableHead>Telephone</TableHead>
                           <TableHead>Attending</TableHead>
                           <TableHead>Submitted</TableHead>
                         </TableRow>
@@ -149,7 +149,7 @@ export default function AdminPage() {
                               <TableCell>
                                 {rsvp.first_name} {rsvp.last_name}
                               </TableCell>
-                              <TableCell>{rsvp.email}</TableCell>
+                              <TableCell>{rsvp.telephone}</TableCell>
                               <TableCell>{rsvp.attending === "yes" ? "Yes" : "No"}</TableCell>
                               <TableCell>{new Date(rsvp.created_at).toLocaleDateString()}</TableCell>
                             </TableRow>
@@ -172,7 +172,7 @@ export default function AdminPage() {
                       <TableHeader>
                         <TableRow>
                           <TableHead>Name</TableHead>
-                          <TableHead>Email</TableHead>
+                          <TableHead>Telephone</TableHead>
                           <TableHead>Message</TableHead>
                           <TableHead>Submitted</TableHead>
                         </TableRow>
@@ -190,7 +190,7 @@ export default function AdminPage() {
                               <TableCell>
                                 {rsvp.first_name} {rsvp.last_name}
                               </TableCell>
-                              <TableCell>{rsvp.email}</TableCell>
+                              <TableCell>{rsvp.telephone}</TableCell>
                               <TableCell>{rsvp.message || "No message"}</TableCell>
                               <TableCell>{new Date(rsvp.created_at).toLocaleDateString()}</TableCell>
                             </TableRow>
@@ -213,7 +213,7 @@ export default function AdminPage() {
                       <TableHeader>
                         <TableRow>
                           <TableHead>Name</TableHead>
-                          <TableHead>Email</TableHead>
+                          <TableHead>Telephone</TableHead>
                           <TableHead>Message</TableHead>
                           <TableHead>Submitted</TableHead>
                         </TableRow>
@@ -231,7 +231,7 @@ export default function AdminPage() {
                               <TableCell>
                                 {rsvp.first_name} {rsvp.last_name}
                               </TableCell>
-                              <TableCell>{rsvp.email}</TableCell>
+                              <TableCell>{rsvp.telephone}</TableCell>
                               <TableCell>{rsvp.message || "No message"}</TableCell>
                               <TableCell>{new Date(rsvp.created_at).toLocaleDateString()}</TableCell>
                             </TableRow>
