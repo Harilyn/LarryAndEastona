@@ -17,7 +17,7 @@ export function RSVPForm() {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
-    email: "",
+    telephone: "",
     attending: "yes",
     message: "",
   })
@@ -83,9 +83,14 @@ export function RSVPForm() {
       <div className="space-y-4">
         <Alert className="bg-sage-50 border-sage-200">
           <AlertDescription className="text-sage-700">
-            <strong>Important:</strong> Our wedding is by invitation only—if you have not received an invitation from either 
-            of us, please do not send an RSVP, as it will not guarantee you a spot. If you believe you were mistakenly left 
-            out, kindly reach out to us directly. Additionally, we respectfully request that guests under 18 not attend, as 
+            <strong>Important:</strong> Our wedding is by invitation only. If you have received an invitation, please
+            RSVP below.
+          </AlertDescription>
+        </Alert>
+
+        <Alert className="bg-sage-50 border-sage-200">
+          <AlertDescription className="text-sage-700">
+            <strong>Adults-Only Celebration:</strong> We kindly request that guests under 18 years of age not attend, as
             this will be an adults-only celebration.
           </AlertDescription>
         </Alert>
@@ -115,12 +120,12 @@ export function RSVPForm() {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="email">Email</Label>
+        <Label htmlFor="telephone">Telephone</Label>
         <Input
-          id="email"
-          type="email"
-          value={formData.email}
-          onChange={(e) => handleInputChange("email", e.target.value)}
+          id="telephone"
+          type="tel"
+          value={formData.telephone}
+          onChange={(e) => handleInputChange("telephone", e.target.value)}
           required
           disabled={isSubmitting}
         />
