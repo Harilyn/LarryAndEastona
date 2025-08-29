@@ -6,16 +6,17 @@ const sql = neon(process.env.DATABASE_URL!)
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { firstName, lastName, email, attending, message } = body
+    const { firstName, lastName, telephone, attending, message } = body
 
     // Validate required fields
-    if (!firstName || !lastName || !email || !attending) {
+    if (!firstName || !lastName || !telephone || !attending) {
       return NextResponse.json({ success: false, message: "Please fill out all required fields" }, { status: 400 })
     }
 
-    // Check if email already exists
+    // Check if telephone already exists
     const existingRSVP = await sql`
-      SELECT * FROM rsvps WHERE email = ${email}
+      SELECT id, first_name, last_name, telephone, attending, message, created_at FROM rsvps 
+      WHERE telephone = ${telephone}
     `
 
     if (existingRSVP.length > 0) {
@@ -26,8 +27,8 @@ export async function POST(request: NextRequest) {
             last_name = ${lastName},
             attending = ${attending},
             message = ${message || ""},
-            updated_at = NOW()
-        WHERE email = ${email}
+            updated_at = CURRENT_TIMESTAMP
+        WHERE telephone = ${telephone}
       `
 
       return NextResponse.json({
@@ -37,8 +38,8 @@ export async function POST(request: NextRequest) {
     } else {
       // Create new RSVP
       await sql`
-        INSERT INTO rsvps (first_name, last_name, email, attending, message)
-        VALUES (${firstName}, ${lastName}, ${email}, ${attending}, ${message || ""})
+        INSERT INTO rsvps (first_name, last_name, telephone, attending, message, created_at, updated_at)
+        VALUES (${firstName}, ${lastName}, ${telephone}, ${attending}, ${message || ""}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
       `
 
       return NextResponse.json({
@@ -58,7 +59,8 @@ export async function POST(request: NextRequest) {
 export async function GET() {
   try {
     const rsvps = await sql`
-      SELECT * FROM rsvps 
+      SELECT id, first_name, last_name, telephone, attending, message, created_at 
+      FROM rsvps 
       ORDER BY created_at DESC
     `
 
