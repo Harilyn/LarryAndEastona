@@ -1,3 +1,7 @@
+"use client"; 
+import React from "react";
+import Navigation from "@/components/Navigation"; // adjust path
+
 "use client"
 
 import Link from "next/link"
